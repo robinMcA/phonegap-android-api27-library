@@ -24,7 +24,7 @@ def call(Map config) {
     }
   }
   
-  container(config.builder) {
+  container("${config.builder}-builder") {
 
     stage('Build Details') {
       echo "Project:   ${config.project}"

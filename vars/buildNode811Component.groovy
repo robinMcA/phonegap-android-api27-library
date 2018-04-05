@@ -14,17 +14,16 @@ def call(Map config) {
 
   def artifactDir = "${config.project}-${config.component}-artifacts"
   def testResultDir = "${config.project}-${config.component}-tests"
-  def scriptDir = "/home/builder/scripts/${config.builder}"
 
-  final runScript = { cmd ->
+  final yarn = { cmd ->
     ansiColor('xterm') {
       dir(config.baseDir) {
-        sh "ARTIFACT_DIR=${artifactDir} TEST_RESULT_DIR=${testResultDir} ${scriptDir}/${cmd}.sh"
+        sh "JEST_JUNIT_OUTPUT=${testResultDir} yarn ${cmd}"
       }
     }
   }
   
-  container("${config.builder}-builder") {
+  container("node811-builder") {
 
     stage('Build Details') {
       echo "Project:   ${config.project}"
@@ -32,13 +31,14 @@ def call(Map config) {
       echo "BuildNumber: ${config.buildNumber}"
     }
 
-    stage('Prepare') {
-      runScript "prepare"
+    stage('Install dependencies') {
+      yarn "install"
     }
 
     stage('Test') {
-      runScript "test"
-      junit "${testDir}/*.xml"
+      sh "mkdir -p ${testResultDir}"
+      yarn 'test --ci --testResultsProcessor="jest-junit"'
+      junit "${testResultDir}/*.xml"
     }
 
   }
@@ -47,11 +47,14 @@ def call(Map config) {
 
     container('node012-builder') {
       stage('Build') {
-        runScript "build"
+        yarn "build"
       }
 
       stage('Package') {
-        runScript "package"
+        sh "mkdir -p ${artifactDir}"
+
+        yarn "install --production --ignore-scripts --prefer-offline"
+        sh "mv node_modules dist package.json config.js ${artifactdir}"
       }
     }
 

@@ -13,12 +13,12 @@
 def call(Map config) {
 
   def artifactDir = "${config.project}-${config.component}-artifacts"
-  def testResultDir = "${config.project}-${config.component}-tests"
+  def testOutput = "${config.project}-${config.component}-tests.xml"
 
   final yarn = { cmd ->
     ansiColor('xterm') {
       dir(config.baseDir) {
-        sh "JEST_JUNIT_OUTPUT=${testResultDir} yarn ${cmd}"
+        sh "JEST_JUNIT_OUTPUT=${testOutput} yarn ${cmd}"
       }
     }
   }
@@ -36,9 +36,8 @@ def call(Map config) {
     }
 
     stage('Test') {
-      sh "mkdir -p ${testResultDir}"
       yarn 'test --ci --testResultsProcessor="jest-junit"'
-      junit "${testResultDir}/*.xml"
+      junit testOutput
     }
 
   }

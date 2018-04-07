@@ -45,7 +45,7 @@ def call(Map config) {
         sh "mkdir -p ${artifactDir}"
 
         yarn "install --production --ignore-scripts --prefer-offline"
-        sh "mv node_modules dist package.json config.js ${artifactDir}"
+        sh "mv node_modules dist package.json next.config.js ${artifactDir}"
       }
     }
 

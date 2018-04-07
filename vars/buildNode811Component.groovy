@@ -36,7 +36,7 @@ def call(Map config) {
 
   if(config.stage == 'dist') {
 
-    container('node012-builder') {
+    container('node811-builder') {
       stage('Build') {
         yarn "build"
       }

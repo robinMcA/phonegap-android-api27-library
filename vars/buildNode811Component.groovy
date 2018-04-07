@@ -1,13 +1,5 @@
 /*
- * Toolform-compatible Jenkins 2 Pipeline build step for docker based builders
- * Expects some or all of the following scripts in /home/builder/scripts/<builder>:
- *  - prepare.sh
- *  - test.sh
- *  - build.sh
- *  - bundle.sh
- * 
- * Output artifacts should be in $ARTIFACT_DIR
- * Test results should be in $TEST_RESULT_DIR
+ * Toolform-compatible Jenkins 2 Pipeline build step for NodeJS 8.11 apps using the node811 builder
  */
 
 def call(Map config) {
@@ -53,7 +45,7 @@ def call(Map config) {
         sh "mkdir -p ${artifactDir}"
 
         yarn "install --production --ignore-scripts --prefer-offline"
-        sh "mv node_modules dist package.json config.js ${artifactdir}"
+        sh "mv node_modules dist package.json config.js ${artifactDir}"
       }
     }
 

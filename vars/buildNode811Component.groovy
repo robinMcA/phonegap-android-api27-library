@@ -53,9 +53,9 @@ def call(Map config) {
           sh "mv static ${artifactDir}"
         }
 
-        if(fileExists('next.config.js') {
+        if(fileExists('next.config.js')) {
           sh "mv next.config.json ${artifactDir}"
-        })
+        }
       }
     }
 

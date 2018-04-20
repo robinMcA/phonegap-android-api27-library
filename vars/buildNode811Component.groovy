@@ -54,7 +54,7 @@ def call(Map config) {
         }
 
         if(fileExists('next.config.js')) {
-          sh "mv next.config.json ${artifactDir}"
+          sh "mv next.config.js ${artifactDir}"
         }
       }
     }

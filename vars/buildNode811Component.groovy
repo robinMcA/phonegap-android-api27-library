@@ -45,16 +45,16 @@ def call(Map config) {
         sh "mkdir -p ${artifactDir}"
 
         yarn "install --production --ignore-scripts --prefer-offline"
-        sh "mv node_modules dist package.json ${artifactDir}"
+        sh "mv ${config.baseDir}/node_modules ${config.baseDir}/dist ${config.baseDir}/package.json ${artifactDir}"
 
         // The static folder and application specific config files 
         // should also be staged if they exist.
-        if(fileExists('static')) {
-          sh "mv static ${artifactDir}"
+        if(fileExists("${config.baseDir}/static")) {
+          sh "mv ${config.baseDir}/static ${artifactDir}"
         }
 
-        if(fileExists('next.config.js')) {
-          sh "mv next.config.js ${artifactDir}"
+        if(fileExists("${config.baseDir}/next.config.js")) {
+          sh "mv ${config.baseDir}/next.config.js ${artifactDir}"
         }
       }
     }

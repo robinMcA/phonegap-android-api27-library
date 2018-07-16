@@ -29,7 +29,7 @@ def call(Map config) {
 
     stage('Test') {
       yarn 'test --ci --testResultsProcessor="jest-junit"'
-      junit allowEmptyResults: true, testOutput
+      junit allowEmptyResults: true, testResults: testOutput
     }
 
   }

@@ -1,5 +1,5 @@
 /*
- * Toolform-compatible Jenkins 2 Pipeline build step for building Android artefacts from Phonegap projects using the phonegap-android-api28 builder
+ * Toolform-compatible Jenkins 2 Pipeline build step for building Android artefacts from Phonegap projects using the phonegap-android-api27 builder
  */
 
 def call(Map config) {
@@ -16,7 +16,7 @@ def call(Map config) {
     }
   }
 
-  container("phonegap-android-api28-builder") {
+  container("phonegap-android-api27-builder") {
 
     stage('Build Details') {
       echo "Project:   ${config.project}"
@@ -41,7 +41,7 @@ def call(Map config) {
 
   if(config.stage == 'dist') {
 
-    container('phonegap-android-api28-builder') {
+    container('phonegap-android-api27-builder') {
       stage('Build Release') {
         npm "run phonegap -- --verbose --release build android"
       }

@@ -48,7 +48,7 @@ def call(Map config) {
 
       stage('Package') {
         sh "mkdir -p ${artifactDir}"
-        sh "mv ${config.baseDir}/${phoneGapOutputDir}/apk/debug/* ${config.baseDir}/${phoneGapOutputDir}/apk/release/* ${artifactDir}"
+        sh "mv -v ${config.baseDir}/${phoneGapOutputDir}/apk/* ${artifactDir}"
       }
     }
 

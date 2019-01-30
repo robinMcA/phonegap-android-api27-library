@@ -33,10 +33,6 @@ def call(Map config) {
       junit allowEmptyResults: true, testResults: testOutput
     }
 
-    stage('Clean') {
-      npm "run phonegap -- --verbose clean android"
-    }
-
     stage('Build Debug') {
       npm "run phonegap -- --verbose build android"
     }

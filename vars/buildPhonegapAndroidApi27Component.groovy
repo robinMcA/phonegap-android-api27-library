@@ -6,7 +6,7 @@ def call(Map config) {
 
   def artifactDir = "${config.project}-${config.component}-artifacts"
   def testOutput = "${config.project}-${config.component}-tests.xml"
-  def phoneGapOutputDir = "platforms/android/app/build/outputs/apk"
+  def phoneGapOutputDir = "platforms/android/app/build/outputs"
 
   final npm = { cmd ->
     ansiColor('xterm') {

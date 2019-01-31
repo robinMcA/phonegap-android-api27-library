@@ -6,13 +6,13 @@ def call(Map config) {
       sizeGiB: 1
     ],
     [
-      path: '/home/jenkins/.gradle/caches',
-      claimName: "${config.project}-home-jenkins-gradle-caches",
+      path: '/home/jenkins/.gradle',
+      claimName: "${config.project}-home-jenkins-gradle",
       sizeGiB: 1
     ],
     [
-      path: '/home/jenkins/.m2/repository',
-      claimName: "${config.project}-home-jenkins-m2-repository",
+      path: '/home/jenkins/.m2',
+      claimName: "${config.project}-home-jenkins-m2",
       sizeGiB: 1
     ]
   ]

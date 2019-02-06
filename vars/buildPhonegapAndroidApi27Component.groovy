@@ -34,6 +34,7 @@ def call(Map config) {
     }
 
     stage('Build Debug') {
+      npm "run prepare-build"
       npm "run phonegap -- --verbose build android"
     }
 
@@ -43,6 +44,7 @@ def call(Map config) {
 
     container('phonegap-android-api27-builder') {
       stage('Build Release') {
+        npm "run prepare-build"
         npm "run phonegap -- --verbose --release build android"
       }
 

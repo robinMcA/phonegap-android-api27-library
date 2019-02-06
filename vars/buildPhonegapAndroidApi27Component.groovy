@@ -11,7 +11,7 @@ def call(Map config) {
   final npm = { cmd ->
     ansiColor('xterm') {
       dir(config.baseDir) {
-        sh "JEST_JUNIT_OUTPUT=${testOutput} npm ${cmd}"
+        sh "CI=true JEST_JUNIT_OUTPUT=${testOutput} npm ${cmd}"
       }
     }
   }
